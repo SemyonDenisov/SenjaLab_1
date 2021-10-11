@@ -4,8 +4,8 @@
 class MyString
 {
 private:
-	char* data = NULL;
-	int size = 0;
+	char* data;
+	int size;
 public:
 	MyString()
 	{
@@ -30,12 +30,8 @@ public:
 	}
 	MyString(const MyString& other)
 	{
-		if (size != other.size)
-		{
-			size = other.size;
-			delete[] data;
-			data = new char[size + 1];
-		}
+		this->size = other.size;
+		data = new char[size + 1];
 		for (int i = 0; i < size; i++)
 		{
 			data[i] = other.data[i];
@@ -60,7 +56,7 @@ public:
 		}
 		return data[index];
 	}
-	friend MyString operator + (const MyString str,const MyString s) 
+	friend MyString operator + (const MyString& str,const MyString& s) 
 	{
 		MyString result;
 		result.size = str.size + s.size;
@@ -89,7 +85,6 @@ public:
 	{
 		return operator * (str, count);
 	}
-	int GetSize() { return size; }
 	MyString substring(int index,int lenght)
 	{
 		if (index < 0 || index > size)
@@ -111,7 +106,7 @@ public:
 		return str;
 	}
 
-	bool operator == (MyString str)
+	bool operator == (MyString &str)
 	{
 		if (size != str.size)
 		{
@@ -128,7 +123,7 @@ public:
 	}
 	friend std::ostream& operator << (std::ostream& out, const MyString& str)
 	{
-		out << "MyString  ";
+		out << "MyString:  ";
 		for (int i = 0; i < str.size; i++)
 		{
 			out << str.data[i];
@@ -138,8 +133,8 @@ public:
 };
 int main()
 {
-	MyString A("gaaaaan");
-	MyString B("guuuun");
+	MyString A("game");
+	MyString B("flame");
 	std::cout << A;
 	std::cout << "\n";
 	try
@@ -154,14 +149,14 @@ int main()
 	}
 	if (A == B)
 	{
-		printf("Yeah");
+		printf("The same strings");
 	}
 	else
-		printf("NoNo");
+		printf("Not same strings");
 	std::cout << "\n";
 	MyString C = A + B;
 	std::cout << C;
-	std::cout << " - +";
+	std::cout << " - Concatenation";
 	std::cout << "\n";
 	try
 	{
@@ -172,10 +167,10 @@ int main()
 	{
 		std::cout << err;
 		std::cout << "\n";
-		MyString D = A.substring(0, 1);
+		MyString D = A.substring(1, 2);
 		std::cout << D;
 	}
-	std::cout << " - Sub";
+	std::cout << " - Substring";
 	std::cout << "\n";
 	try
 	{
@@ -189,9 +184,9 @@ int main()
 		std::cout << X;
 	}
 	MyString Y = 4 * A;
-	std::cout << " - *";
+	std::cout << " - Multiplying a string by a number";
 	std::cout << "\n";
 	std::cout << Y;
-	std::cout << " - *";
+	std::cout << " - Multiplying a number by string";
 	return 0;
 };
