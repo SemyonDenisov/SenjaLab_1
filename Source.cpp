@@ -147,9 +147,6 @@ public:
 };
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
 	int n;
 	bool ex = true;
 	char* string_1 = new char;
@@ -165,13 +162,13 @@ int main()
 		std::cout <<"1)"<< A << std::endl;
 		std::cout <<"2)"<< B << std::endl;
 		std::cout << "\n";
-		std::cout << "Выберите пункт:" << std::endl;
-		std::cout << "1)Изменение элемента по индексу" << std::endl;
-		std::cout << "2)Проверка на равенство строк" << std::endl;
-		std::cout << "3)Конкатенация строк" << std::endl;
-		std::cout << "4)Получение подстроки" << std::endl;
-		std::cout << "5)Умножение строки на число" << std::endl;
-		std::cout << "6)Выход" << std::endl;
+		std::cout << "Choise the menu item:" << std::endl;
+		std::cout << "1)Changing an item by index" << std::endl;
+		std::cout << "2)Equality check" << std::endl;
+		std::cout << "3)Concotenation" << std::endl;
+		std::cout << "4)Get the substring" << std::endl;
+		std::cout << "5)Multiplying a string by number" << std::endl;
+		std::cout << "6)Exit" << std::endl;
 		std::cin >> n;
 		system("cls");
 		std::cout <<"1)"<< A << std::endl;
@@ -182,13 +179,13 @@ int main()
 			case 1://Изменение элемента по индексу
 			{
 				int number;
-				std::cout << "Какую строку хотите изменить:" << std::endl;
+				std::cout << "Which line would you like to change:" << std::endl;
 				std::cin >> number;
 				int index;
 				char character;
-				std::cout << "Введите индекс элемента:" << std::endl;
+				std::cout << "Enter the element index:" << std::endl;
 				std::cin >> index;
-				std::cout << "Введите элемент:" << std::endl;
+				std::cout << "Enter the element:" << std::endl;
 				std::cin >> character;
 				system("cls");
 				if (number == 1)
@@ -221,10 +218,10 @@ int main()
 					system("cls");
 					if (A == B)
 					{
-						std::cout << "Строки равны" << std::endl;
+						std::cout << "Strings are equal" << std::endl;
 					}
 					else
-						std::cout << "Строки не равны" << std::endl;
+						std::cout << "Strings are not equal" << std::endl;
 					break;
 				}
 
@@ -232,20 +229,20 @@ int main()
 				{
 					system("cls");
 					MyString Result = A + B;
-					std::cout << Result << " - Строка-результат"<< std::endl;
+					std::cout << Result << " - Result string"<< std::endl;
 					break;
 				}
 
 			case 4://Получение подстроки
 			{
 				int number;
-				std::cout << "У какой строки хотите получить подстроку:" << std::endl;
+				std::cout << "Number of string,which you want to get substring:" << std::endl;
 				std::cin >> number;
 				int index;
 				int lenght;
-				std::cout << "Введите индекс, с котрого будет начинаться подстрока" << std::endl;
+				std::cout << "Enter the start index" << std::endl;
 				std::cin >> index;
-				std::cout << "Введите длину подстроки" << std::endl;
+				std::cout << "Enter the lenght" << std::endl;
 				std::cin >> lenght;
 				system("cls");
 				if (number == 1)
@@ -253,7 +250,7 @@ int main()
 					try
 					{
 						MyString D = A.substring(index, lenght);
-						std::cout << D << " - Строка-результат" << std::endl;
+						std::cout << D << " - Result string" << std::endl;
 					}
 					catch (const char* err)
 					{
@@ -265,7 +262,7 @@ int main()
 					try
 					{
 						MyString D = B.substring(index, lenght);
-						std::cout << D << " - Строка-результат"<<std::endl;
+						std::cout << D << " - Result string"<<std::endl;
 					}
 					catch (const char* err)
 					{
@@ -279,9 +276,9 @@ int main()
 			{
 				int number;
 				int count;
-				std::cout << "Какую строку хотите умножить:" << std::endl;
+				std::cout << "Which line would you like to multiplying:" << std::endl;
 				std::cin >> number;
-				std::cout << "На какое число хотите умножить:" << std::endl;
+				std::cout << "Number to multiply:" << std::endl;
 				std::cin >> count;
 				system("cls");
 				if (number == 1)
@@ -289,7 +286,7 @@ int main()
 					try
 					{
 						MyString D = A * count;
-						std::cout << D << " - Строка-результат" << std::endl;
+						std::cout << D << " - Result string" << std::endl;
 					}
 					catch (const char* err)
 					{
@@ -301,7 +298,7 @@ int main()
 					try
 					{
 						MyString D = B * count;
-						std::cout << D << " - Строка-результат" << std::endl;
+						std::cout << D << " - Result string" << std::endl;
 					}
 					catch (const char* err)
 					{
