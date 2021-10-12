@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "stdio.h"
-#include "iostream"
+#include <stdio.h>
+#include <iostream>
+#include <locale>
+#include <string>
 class MyString
 {
 private:
@@ -48,14 +50,16 @@ public:
 			delete[] data;
 		}
 	}
+
 	char& operator [] (int index)
 	{
-		if (index < 0 || index > size)
+		if (index < 0 || index >= size)
 		{
 			throw "Invalid index";
 		}
 		return data[index];
 	}
+
 	friend MyString operator + (const MyString& str,const MyString& s) 
 	{
 		MyString result;
@@ -65,6 +69,7 @@ public:
 		strcpy(result.data + str.size, s.data);
 		return result;
 	}
+
 	friend MyString operator * (MyString& str,int count)
 	{
 		if (count < 0)
@@ -81,10 +86,12 @@ public:
 		result.data[result.size] = '\0';
 		return result;
 	}
+
 	friend MyString operator * (int count, MyString& str)
 	{
 		return operator * (str, count);
 	}
+
 	MyString substring(int index,int lenght)
 	{
 		if (index < 0 || index > size)
@@ -121,6 +128,12 @@ public:
 		}
 		return true;
 	}
+
+	bool operator !=(MyString& str)
+	{
+		return !(operator ==(str));
+	}
+
 	friend std::ostream& operator << (std::ostream& out, const MyString& str)
 	{
 		out << "MyString:  ";
@@ -133,60 +146,174 @@ public:
 };
 int main()
 {
-	MyString A("game");
-	MyString B("flame");
-	std::cout << A;
-	std::cout << "\n";
-	try
+	setlocale(LC_ALL, "Russian");
+	int n;
+	bool ex = true;
+	char* string_1 = new char;
+	char* string_2 = new char;
+	std::cout <<"Enter the first string:";
+	std::cin >> string_1;
+	MyString A(string_1);
+	std::cout << "Enter the second string:";
+	std::cin >> string_2;
+	MyString B(string_2);
+	while (ex)
 	{
-		A[-1] = 'q';
-	}
-	catch (const char*err)
-	{
-		std::cout << err;
+		std::cout <<"1)"<< A << std::endl;
+		std::cout <<"2)"<< B << std::endl;
 		std::cout << "\n";
-		A[0] = 'g';
+		std::cout << "Выберите пункт:" << std::endl;
+		std::cout << "1)Изменение элемента по индексу" << std::endl;
+		std::cout << "2)Проверка на равенство строк" << std::endl;
+		std::cout << "3)Конкатенация строк" << std::endl;
+		std::cout << "4)Получение подстроки" << std::endl;
+		std::cout << "5)Умножение строки на число" << std::endl;
+		std::cout << "6)Выход" << std::endl;
+		std::cin >> n;
+		system("cls");
+		std::cout <<"1)"<< A << std::endl;
+		std::cout <<"2)"<< B << std::endl;
+		switch (n)
+		{
+
+			case 1://Изменение элемента по индексу
+			{
+				int number;
+				std::cout << "Какую строку хотите изменить:" << std::endl;
+				std::cin >> number;
+				int index;
+				char character;
+				std::cout << "Введите индекс элемента:" << std::endl;
+				std::cin >> index;
+				std::cout << "Введите элемент:" << std::endl;
+				std::cin >> character;
+				system("cls");
+				if (number == 1)
+				{
+					try
+					{
+						A[index] = character;
+					}
+					catch(const char*err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				if (number == 2)
+				{
+					try
+					{
+						B[index] = character;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				break;
+			}
+
+			case 2:
+				{//Проверка на равенство строк
+					system("cls");
+					if (A == B)
+					{
+						std::cout << "Строки равны" << std::endl;
+					}
+					else
+						std::cout << "Строки не равны" << std::endl;
+					break;
+				}
+
+				case 3://Конкатенация строк
+				{
+					system("cls");
+					MyString Result = A + B;
+					std::cout << Result << " - Строка-результат"<< std::endl;
+					break;
+				}
+
+			case 4://Получение подстроки
+			{
+				int number;
+				std::cout << "У какой строки хотите получить подстроку:" << std::endl;
+				std::cin >> number;
+				int index;
+				int lenght;
+				std::cout << "Введите индекс, с котрого будет начинаться подстрока" << std::endl;
+				std::cin >> index;
+				std::cout << "Введите длину подстроки" << std::endl;
+				std::cin >> lenght;
+				system("cls");
+				if (number == 1)
+				{
+					try
+					{
+						MyString D = A.substring(index, lenght);
+						std::cout << D << " - Строка-результат" << std::endl;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				if (number == 2)
+				{
+					try
+					{
+						MyString D = B.substring(index, lenght);
+						std::cout << D << " - Строка-результат"<<std::endl;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				break;
+			}
+
+			case 5://Умножение строки на число
+			{
+				int number;
+				int count;
+				std::cout << "Какую строку хотите умножить:" << std::endl;
+				std::cin >> number;
+				std::cout << "На какое число хотите умножить:" << std::endl;
+				std::cin >> count;
+				system("cls");
+				if (number == 1)
+				{
+					try
+					{
+						MyString D = A * count;
+						std::cout << D << " - Строка-результат" << std::endl;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				if (number == 2)
+				{
+					try
+					{
+						MyString D = B * count;
+						std::cout << D << " - Строка-результат" << std::endl;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+					}
+				}
+				break;
+			}
+
+			case 6://Выход
+			{
+				system("cls");	
+				ex = false;
+			}
+		}
 	}
-	if (A == B)
-	{
-		printf("The same strings");
-	}
-	else
-		printf("Not same strings");
-	std::cout << "\n";
-	MyString C = A + B;
-	std::cout << C;
-	std::cout << " - Concatenation";
-	std::cout << "\n";
-	try
-	{
-		MyString D = A.substring(1, 6);
-		std::cout << D;
-	}
-	catch(const char* err)
-	{
-		std::cout << err;
-		std::cout << "\n";
-		MyString D = A.substring(1, 2);
-		std::cout << D;
-	}
-	std::cout << " - Substring";
-	std::cout << "\n";
-	try
-	{
-		MyString X = A * -1;
-	}
-	catch (const char* err)
-	{
-		std::cout << err;
-		std::cout << "\n";
-		MyString X = A * 3;
-		std::cout << X;
-	}
-	MyString Y = 4 * A;
-	std::cout << " - Multiplying a string by a number";
-	std::cout << "\n";
-	std::cout << Y;
-	std::cout << " - Multiplying a number by string";
 	return 0;
 };
