@@ -176,7 +176,7 @@ int main()
 		switch (n)
 		{
 
-			case 1://Изменение элемента по индексу
+			case 1://Changing an item by index
 			{
 				int number;
 				std::cout << "Which line would you like to change:" << std::endl;
@@ -213,8 +213,8 @@ int main()
 				break;
 			}
 
-			case 2:
-				{//Проверка на равенство строк
+			case 2://Equality check
+				{
 					system("cls");
 					if (A == B)
 					{
@@ -225,7 +225,7 @@ int main()
 					break;
 				}
 
-				case 3://Конкатенация строк
+				case 3://Concotenation
 				{
 					system("cls");
 					MyString Result = A + B;
@@ -233,7 +233,7 @@ int main()
 					break;
 				}
 
-			case 4://Получение подстроки
+			case 4://Get the substring
 			{
 				int number;
 				std::cout << "Number of string,which you want to get substring:" << std::endl;
@@ -272,7 +272,7 @@ int main()
 				break;
 			}
 
-			case 5://Умножение строки на число
+			case 5://Multiplying a string by number
 			{
 				int number;
 				int count;
@@ -308,7 +308,7 @@ int main()
 				break;
 			}
 
-			case 6://Выход
+			case 6://Exit
 			{
 				system("cls");	
 				ex = false;
