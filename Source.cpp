@@ -3,6 +3,7 @@
 #include <iostream>
 #include <locale>
 #include <string>
+#include<windows.h>
 class MyString
 {
 private:
@@ -147,6 +148,8 @@ public:
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	int n;
 	bool ex = true;
 	char* string_1 = new char;
